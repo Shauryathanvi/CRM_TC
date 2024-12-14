@@ -35,31 +35,30 @@ namespace SoftwareEngineering_2024
         private void ProceedTagBt_Click(object? sender, EventArgs e)
         {
 
-            //List<string> INTEREST = GetSelectedInterest(); // Ensure you are calling the correct method
+            List<string> INTEREST = GetSelectedInterest(); // Ensure you are calling the correct method
 
-            //if (INTEREST != null && INTEREST.Count > 0) // Check if the list is not null and contains items
-            //{
-            //    try
-            //    {
-            //        // Use the UserDAL instance to save the interests to the database
-            //        bool Registered = userDAL.SaveInterestToDatabase(INTEREST);
+            if (INTEREST != null && INTEREST.Count > 0) // Check if the list is not null and contains items
+            {
+                try
+                {
+                    // Use the UserDAL instance to save the interests to the database
+                    bool Registered = userDAL.SaveInterestToDatabase(INTEREST);
 
-            //        MessageBox.Show("Interests saved successfully!");
-            //        FormTracker.StepsCompleted[1] = true;  //this will count this form if the form is completed then it will store true
-            //        Opener.OpenForm(this, typeof(TagsForm));
+                    MessageBox.Show("Interests saved successfully!");
+                    FormTracker.StepsCompleted[1] = true;  //this will count this form if the form is completed then it will store true
+                    Opener.OpenForm(this, typeof(TagsForm));
 
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show("Error: " + ex.Message);
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Please select at least one interest.");
-            //}
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select at least one interest.");
+            }
 
-            bool Interest = userDAL.InsertMemberInterests(Learning, Helping, Sharing, Working, Happening);
 
         }
 

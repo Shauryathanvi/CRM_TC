@@ -246,77 +246,113 @@ namespace SoftwareEngineering_2024.DB_connect
 
 
 
-        public bool InsertMemberInterests(CheckBox checkBox1, CheckBox checkBox2, CheckBox checkBox3, CheckBox checkBox4, CheckBox checkBox5)
+        //public bool InsertMemberInterests(CheckBox checkBox1, CheckBox checkBox2, CheckBox checkBox3, CheckBox checkBox4, CheckBox checkBox5)
+        //{
+        //    // List to hold the interest IDs of checked checkboxes
+        //    List<int> checkedInterestIds = new List<int>();
+
+        //    // Array of checkboxes to iterate through
+        //    CheckBox[] checkBoxes = { checkBox1, checkBox2, checkBox3, checkBox4, checkBox5 };
+
+        //    // Iterate through the checkboxes and add the Tag values of checked ones to the list
+        //    foreach (CheckBox checkBox in checkBoxes)
+        //    {
+        //        if (int.TryParse(checkBox.Tag?.ToString(), out int interest_id))
+        //        {
+        //            checkedInterestIds.Add(interest_id); // Add the parsed interest_id to the list
+        //        }
+        //        else
+        //        {
+        //            // Handle the case where the Tag is not a valid integer
+        //            Console.WriteLine($"Invalid interest_id in Tag for checkbox {checkBox.Name}");
+        //        }
+        //    }
+
+        //    // If no interest IDs are checked, return false
+        //    if (checkedInterestIds.Count == 0)
+        //    {
+        //        return false;
+        //    }
+
+        //    // Now use the db connection and query logic to insert the values
+        //    foreach (int interestId in checkedInterestIds)
+        //    {
+        //        using (MySqlCommand insertCmd = new MySqlCommand(SqlQueries.InsertInterestQuery, db.GetConnection()))
+        //        {
+        //            // Clear existing parameters to avoid duplicate definitions
+        //            insertCmd.Parameters.Clear();
+
+        //            // Add parameters for the insert query
+        //            insertCmd.Parameters.AddWithValue("@interest_id", interestId);
+        //            insertCmd.Parameters.AddWithValue("@member_id", id);
+
+        //            try
+        //            {
+        //                // Open the connection, execute the insert command, and close the connection
+        //                db.OpenConnection();
+        //                int rowsAffected = insertCmd.ExecuteNonQuery();
+        //                db.CloseConnection();
+
+        //                // If rows are affected, it means the insert was successful
+        //                if (rowsAffected <= 0)
+        //                {
+        //                    return false;
+        //                }
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                // Handle any errors that occur during the insert
+        //                Console.WriteLine("Error: " + ex.Message);
+        //                db.CloseConnection();
+        //                return false;
+        //            }
+        //            finally
+        //            {
+        //                // Ensure the connection is closed
+        //                db.CloseConnection();
+        //            }
+        //        }
+        //    }
+
+        //    return true;
+        //}
+
+        public bool DeleteMembersWithNullRegistration()
         {
-            // List to hold the interest IDs of checked checkboxes
-            List<int> checkedInterestIds = new List<int>();
+            // Define the SQL query to delete rows where is_registered is NULL
+            string deleteQuery = "DELETE FROM `members` WHERE `is_registered` IS NULL;";
 
-            // Array of checkboxes to iterate through
-            CheckBox[] checkBoxes = { checkBox1, checkBox2, checkBox3, checkBox4, checkBox5 };
-
-            // Iterate through the checkboxes and add the Tag values of checked ones to the list
-            foreach (CheckBox checkBox in checkBoxes)
+            // Using MySQLCommand for database interaction
+            using (MySqlCommand cmd = new MySqlCommand(deleteQuery, db.GetConnection()))
             {
-                if (int.TryParse(checkBox.Tag?.ToString(), out int interest_id))
+                try
                 {
-                    checkedInterestIds.Add(interest_id); // Add the parsed interest_id to the list
+                    // Open the connection
+                    db.OpenConnection();
+
+                    // Execute the delete query
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    // Close the connection
+                    db.CloseConnection();
+
+                    // If rows were deleted, return true, else false
+                    return rowsAffected > 0;
                 }
-                else
+                catch (Exception ex)
                 {
-                    // Handle the case where the Tag is not a valid integer
-                    Console.WriteLine($"Invalid interest_id in Tag for checkbox {checkBox.Name}");
+                    // Handle any errors that occur during the delete operation
+                    Console.WriteLine("Error deleting members: " + ex.Message);
+                    db.CloseConnection();
+                    return false;
                 }
-            }
-
-            // If no interest IDs are checked, return false
-            if (checkedInterestIds.Count == 0)
-            {
-                return false;
-            }
-
-            // Now use the db connection and query logic to insert the values
-            foreach (int interestId in checkedInterestIds)
-            {
-                using (MySqlCommand insertCmd = new MySqlCommand(SqlQueries.InsertInterestQuery, db.GetConnection()))
+                finally
                 {
-                    // Clear existing parameters to avoid duplicate definitions
-                    insertCmd.Parameters.Clear();
-
-                    // Add parameters for the insert query
-                    insertCmd.Parameters.AddWithValue("@interest_id", interestId);
-                    insertCmd.Parameters.AddWithValue("@member_id", id);
-
-                    try
-                    {
-                        // Open the connection, execute the insert command, and close the connection
-                        db.OpenConnection();
-                        int rowsAffected = insertCmd.ExecuteNonQuery();
-                        db.CloseConnection();
-
-                        // If rows are affected, it means the insert was successful
-                        if (rowsAffected <= 0)
-                        {
-                            return false;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        // Handle any errors that occur during the insert
-                        Console.WriteLine("Error: " + ex.Message);
-                        db.CloseConnection();
-                        return false;
-                    }
-                    finally
-                    {
-                        // Ensure the connection is closed
-                        db.CloseConnection();
-                    }
+                    // Ensure the connection is always closed
+                    db.CloseConnection();
                 }
             }
-
-            return true;
         }
-
 
 
 

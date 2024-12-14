@@ -17,9 +17,7 @@ namespace SoftwareEngineering_2024.DB_connect
         public const string INTEREST_query = "INSERT INTO interests (interest_1, interest_2, interest_3, interest_4, interest_5, member_id) VALUES (@interest_1, @interest_2, @interest_3, @interest_4, @interest_5, @member_id)";
         public const string TAG_query = "INSERT INTO tags (tag_1, tag_2, tag_3, tag_4, tag_5, tag_6, tag_7, tag_8, tag_9, tag_10, tag_11, tag_12, member_id) VALUES (@tag_1, @tag_2, @tag_3, @tag_4, @tag_5, @tag_6, @tag_7, @tag_8, @tag_9, @tag_10, @tag_11, @tag_12, @member_id)";
         public const string MemInfo_query = "UPDATE members\r\nSET membership_id = @membership_id\r\nWHERE member_id = @member_id;\r\n ";
-        public const string InsertInterestQuery = "INSERT INTO member_interest \r\n" +
-                                           "(`interest_id`, `member_id`) \r\n" +
-                                           "VALUES (@interest_id, @member_id);\r\n";
+        
         public const string Payment_query = "INSERT INTO payments (cardHolder_name, card_no, cvv, house_no, city, state, country, street , citycode, exp_date , member_id) VALUES (@cardHolder_name, @card_no, @cvv, @house_no, @city, @state, @country, @street, @citycode, @exp_date, @member_id )";
         public const string IsRegisteredUpdate = "UPDATE members \r\nSET is_registered = 1\r\nWHERE member_id = @member_id;";
 

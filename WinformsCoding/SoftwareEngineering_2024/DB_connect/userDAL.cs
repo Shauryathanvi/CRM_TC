@@ -436,6 +436,40 @@ namespace SoftwareEngineering_2024.DB_connect
 
 
 
+        public bool DeleteUser()
+        {
+
+         
+            string Delete_query = "DELETE FROM members\r\nWHERE is_registered IS NULL;\r\n";
+
+            using (MySqlCommand command = new MySqlCommand(Delete_query, db.GetConnection()))
+            {
+    
+
+
+                try
+                {
+                    db.OpenConnection();
+                    command.ExecuteNonQuery();
+                    db.CloseConnection();
+                    return true;
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error registering user: " + ex.Message);
+                    db.CloseConnection();
+                    return false;
+                }
+
+
+            }
+
+
+        }
+
+
+
         //This method will authentic the user at the time of login
         public bool AuthenticateUser(string Email, string Password, out bool isRegistered)
         {

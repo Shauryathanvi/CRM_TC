@@ -53,7 +53,7 @@ namespace SoftwareEngineering_2024
                                 MessageBoxIcon.Error);
             }
 
-            
+
 
 
         }
@@ -61,6 +61,11 @@ namespace SoftwareEngineering_2024
         private void Admin_log_in_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FormOpener.OpenUserForm(this, typeof(LoginForm));
         }
     }
 }

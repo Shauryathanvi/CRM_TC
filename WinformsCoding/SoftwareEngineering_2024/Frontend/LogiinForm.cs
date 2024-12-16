@@ -29,6 +29,7 @@ namespace SoftwareEngineering_2024
         private void SignUpLinkClicked(object sender, EventArgs e)
         {
             FormOpener.OpenUserForm(this, typeof(SignUpForm));
+            userDAL.DeleteUser();
         }
 
 

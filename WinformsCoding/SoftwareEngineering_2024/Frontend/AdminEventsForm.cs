@@ -36,7 +36,7 @@ namespace SoftwareEngineering_2024
 
         private void MemQ1Bt_Click(object sender, EventArgs e)
         {
-            string query2 = "SELECT membership_id, COUNT(*) AS member_count FROM members GROUP BY membership_id ORDER BY membership_id";
+            string query2 = "SELECT event_type AS EVENT_TYPE, count(*) AS TOTAL_EVENT FROM crm.events group by event_type;";
             ShowTables.GRIDVIEW(EventsTableDg, query2);
         }
 
@@ -48,7 +48,7 @@ namespace SoftwareEngineering_2024
 
         private void Q2_Click(object sender, EventArgs e)
         {
-            string query1 = "SELECT membership_id, COUNT(*) AS member_count FROM members GROUP BY membership_id ORDER BY membership_id";
+            string query1 = "SELECT space AS SPACE, COUNT(*) AS EVENT_COUNT FROM crm.events GROUP BY space ORDER BY space;";
             ShowTables.GRIDVIEW(EventsTableDg, query1);
         }
     }

@@ -41,6 +41,7 @@
             email_txt = new MaskedTextBox();
             TCLogo = new PictureBox();
             oracleCommand1 = new Oracle.ManagedDataAccess.Client.OracleCommand();
+            linkLabel1 = new LinkLabel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)IgLink).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GmapLink).BeginInit();
@@ -64,6 +65,7 @@
             // 
             panel1.BackColor = Color.RosyBrown;
             panel1.BackgroundImageLayout = ImageLayout.Stretch;
+            panel1.Controls.Add(linkLabel1);
             panel1.Controls.Add(IgLink);
             panel1.Controls.Add(GmapLink);
             panel1.Controls.Add(FbLink);
@@ -178,6 +180,17 @@
             // 
             oracleCommand1.Transaction = null;
             // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new Point(283, 360);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(143, 15);
+            linkLabel1.TabIndex = 10;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Not an admin?? click here";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            // 
             // Admin_log_in
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -215,5 +228,6 @@
         private MaskedTextBox email_txt;
         private PictureBox TCLogo;
         private Oracle.ManagedDataAccess.Client.OracleCommand oracleCommand1;
+        private LinkLabel linkLabel1;
     }
 }
